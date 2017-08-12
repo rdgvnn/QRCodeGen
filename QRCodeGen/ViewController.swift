@@ -9,6 +9,24 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    @IBOutlet weak var MyText: UITextField!
+    @IBOutlet weak var MyImage: UIImageView!
+    
+    @IBAction func MyButton(_ sender: UIButton)
+    {
+    
+    if let myString = MyText.text
+        {
+            let data = myString.data(using: .ascii, allowLossyConversion: false)
+            let filter = CIFilter(name: "CIQRCodeGenerator")
+            filter?.setValue(data, forKey: "inputMessage")
+            
+            let image = UIImage(ciImage: (filter?.outputImage)!)
+            
+            MyImage.image = image
+    }
+        }
 
     override func viewDidLoad() {
         super.viewDidLoad()
